@@ -1,10 +1,11 @@
 # Android 可下載預覽版
 
-版本：0.1.0-alpha.1。目標為 Android 8.0 / API 26 以上的 ARM64 手機／平板。
+版本：0.1.0-alpha.2。目標為 Android 8.0 / API 26 以上的 ARM64 手機／平板。
 通用 APK 同時包含 ARM64 與 x86_64 原生函式庫；需要 OpenGL ES 3.0。
 
 ## 可操作範圍
 
+- 全介面繁體中文，內嵌完整 Noto Sans CJK TC 開源字型，離線可用。
 - 原生 Rust / egui 觸控介面，無網路權限、無帳號。
 - 三段程式繪製的動態示範素材與 30 fps 播放頭。
 - 手機單欄；較寬的橫向／平板視窗使用預覽與工具雙欄，內容可捲動。
@@ -19,11 +20,14 @@
 ## 取得與安裝
 
 發佈位置：[GitHub Releases](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases)。
-資產檔名為 `filmcraft-mobile-0.1.0-alpha.1-universal.apk`，附 `SHA256SUMS.txt`。
+資產檔名為 `filmcraft-mobile-0.1.0-alpha.2-universal.apk`，附 `SHA256SUMS.txt`。
 
 1. 在 Android 裝置下載 APK。
 2. 開啟下載的 APK，依 Android 畫面允許該下載來源安裝應用程式。
-3. 安裝後開啟 **FilmCraft Mobile**。
+3. 安裝後開啟 **影片工坊**。
+
+已安裝 `0.1.0-alpha.1` 時，下載新版直接覆蓋更新即可保留示範專案；不需要先解除安裝。
+此版沿用相同套件識別與本機簽章，版本代碼由 1 提升至 2。
 
 這是直接安裝的早期預覽版，使用專案本機保存的預覽簽署身分；並非 Google Play 發佈版。
 iPhone / iPad 不能安裝 APK；本次沒有 IPA / TestFlight 發佈。
@@ -53,3 +57,8 @@ NDK 連結設定使用 16 KiB 最大頁面大小；仍需個別記錄 16 KiB 裝
 
 編譯、APK 結構、簽章、模擬器執行與實體裝置分開記錄。
 具體發布前結果記於 Release 說明與 [android-validation.md](android-validation.md)。
+
+## 中文介面與授權
+
+按鈕、素材名稱、狀態、錯誤提示及應用程式名稱皆為繁體中文。程式語言、第三方專案名稱與標準授權識別保留原名，法律授權文字保留原文。
+完整字型隨安裝檔提供，因此檔案約 33.6 MB；固定來源、版本與授權見 [素材來源](../ATTRIBUTION.md)。

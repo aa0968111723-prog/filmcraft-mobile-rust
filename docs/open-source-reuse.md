@@ -74,3 +74,21 @@ egui / wgpu / cargo-ndk 與 Apple crates 尚未納入這個 probe。
 完整查核時的 repository head、分支與維護狀態存於
 [source-snapshots.json](research/source-snapshots.json)。這些 SHA 是研究快照，
 不是產品已採用的 Git 依賴；實際 probe 使用 crates.io 版本及其 Cargo.lock。
+
+
+## 繁體中文字型（第 2 次預覽版）
+
+採用官方 [Noto Sans CJK TC](https://github.com/notofonts/noto-cjk/tree/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/OTF/TraditionalChinese) 的 Regular OTF，
+固定上游版本 `f8d157532fbfaeda587e826d4cd5b21a49186f7c`，未修改或裁切字型。
+[官方下載說明](https://github.com/notofonts/noto-cjk/blob/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/README.md)標示 TC 為臺灣繁體中文字形；
+[原始授權](https://github.com/notofonts/noto-cjk/blob/f8d157532fbfaeda587e826d4cd5b21a49186f7c/Sans/LICENSE)為 SIL Open Font License 1.1，允許嵌入與隨軟體散布，保留授權文字及字型內的作者資訊。
+
+完整字型內嵌於原生程式，比例字型與等寬字型都使用它補齊中文字元；離線啟動不需要下載或依賴裝置的字型路徑。
+字型檔案 SHA-256 與來源保留在 `apps/mobile/assets/fonts/ATTRIBUTION.txt`，授權原文亦納入安裝檔的第三方授權文件。
+實際 Android 畫面驗證結果見 [驗證紀錄](android-validation.md)。
+
+
+## 追加手機剪輯專案對照（2026-10-25）
+
+已查核 7 個手機剪輯 App／媒體元件的固定來源、授權與功能邊界，見 [手機／平板專案對照](mobile-editor-comparison.md)。
+優先沿用 Media3 作 Android 媒體接縫，補時間軸互動，再比較備選轉碼與 Apple 效果後端。新候選均屬研究，尚未接入產品。

@@ -6,6 +6,13 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $taskRoot = Split-Path $PSScriptRoot -Parent
+[xml]$taskManifest = Get-Content -LiteralPath (Join-Path $taskRoot 'packaging/android/AndroidManifest.xml') -Raw
+$taskVersion = $taskManifest.manifest.GetAttribute('versionName', 'http://schemas.android.com/apk/res/android')
+if ($taskVersion -notmatch '^[0-9A-Za-z.-]+$') { throw 'Invalid Android version name.' }
+$taskFontHash = (Get-FileHash -LiteralPath (Join-Path $taskRoot 'apps/mobile/assets/fonts/NotoSansCJKtc-Regular.otf') -Algorithm SHA256).Hash
+if ($taskFontHash -ne 'dce08bd4fd91aa8aa76ed8fea4b694c2dfb8550f67871e326843212ddbeb88b4') {
+    throw 'Bundled Chinese font does not match the pinned upstream file.'
+}
 $taskOutput = Join-Path $taskRoot 'target/android'
 $taskAssets = Join-Path $taskOutput 'assets'
 $taskSigning = Join-Path $taskRoot '.local/signing'
@@ -40,7 +47,7 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Could not resolve third-party notices.' }
     $taskMetadata = $taskMetadataText | ConvertFrom-Json
     $taskNotice = [Text.StringBuilder]::new()
-    [void]$taskNotice.AppendLine('FilmCraft Mobile 0.1.0-alpha.1 - third-party license notices')
+    [void]$taskNotice.AppendLine("影片工坊 $taskVersion — 第三方授權原文")
     foreach ($taskPackage in ($taskMetadata.packages | Sort-Object name, version)) {
         [void]$taskNotice.AppendLine("`n=== $($taskPackage.name) $($taskPackage.version) ===")
         [void]$taskNotice.AppendLine("License expression: $($taskPackage.license)")
@@ -94,7 +101,7 @@ try {
     } else {
         $env:FC_SIGNING_PASSWORD = [IO.File]::ReadAllText($taskPasswordFile)
     }
-    $taskApk = Join-Path $taskOutput 'filmcraft-mobile-0.1.0-alpha.1-universal.apk'
+    $taskApk = Join-Path $taskOutput "filmcraft-mobile-$taskVersion-universal.apk"
     & (Join-Path $taskBuildTools 'apksigner.bat') sign --ks $taskKey --ks-key-alias preview --ks-pass env:FC_SIGNING_PASSWORD --key-pass env:FC_SIGNING_PASSWORD --out $taskApk $taskAligned
     if ($LASTEXITCODE -ne 0) { throw 'APK signing failed.' }
     & (Join-Path $taskBuildTools 'apksigner.bat') verify --verbose $taskApk

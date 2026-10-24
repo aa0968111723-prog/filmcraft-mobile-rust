@@ -1,12 +1,13 @@
-# FilmCraft Mobile Rust
+# 影片工坊行動版（FilmCraft Mobile Rust）
 
 以手機與平板為優先的開源影片剪輯專案，採用 **Rust 為主，平台整合為輔**。
 這是獨立的行動版實驗專案，基於 FilmCraft 的開源核心方向，非上游官方行動版。
 
 **目前狀態：原生 Android 示範剪輯預覽版。可操作生成素材的時間軸，尚不能匯入／匯出真實影片。**
 
-取得 APK：[Android 預覽版 Release](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/tag/v0.1.0-alpha.1)。
-[直接下載 APK](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/download/v0.1.0-alpha.1/filmcraft-mobile-0.1.0-alpha.1-universal.apk)（約 6.2 MB）。
+取得 APK：[Android 預覽版 Release](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/tag/v0.1.0-alpha.2)。
+[直接下載 APK](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/download/v0.1.0-alpha.2/filmcraft-mobile-0.1.0-alpha.2-universal.apk)（約 33.6 MB）。
+已安裝第 1 版可直接覆蓋更新，保留原有示範專案。安裝後名稱顯示為「影片工坊」。
 安裝與建置說明見 [docs/android-preview.md](docs/android-preview.md)，驗證範圍見 [docs/android-validation.md](docs/android-validation.md)。
 iPhone / iPad 尚無安裝檔。
 
@@ -28,11 +29,13 @@ iPhone / iPad 尚無安裝檔。
 ## 已完成
 
 - Cargo workspace 與 Rust 安全規則。
+- 全介面繁體中文，包含按鈕、素材名稱、狀態與錯誤提示；內嵌完整開源中文字型，可離線顯示。
 - 可打包的 Rust Android App：示範素材、播放頭、裁切、分割、排序、復原／重做與本機存檔。
 - 以固定 Git commit **實際依賴**原有 `filmcraft-time`，保留整數 Tick 的精確時間。
 - 驗證剪裁範圍、拒絕時間溢位、計算有限的 CPU 預覽快取容量。
-- 手機／平板寬度版面策略，供之後介面使用；目前沒有畫面。
+- 手機單欄與寬視窗雙欄介面，已於 Android 模擬器檢視。
 - 主機端 smoke example、核心測試與 GitHub Actions 設定。
+- [手機剪輯專案對照](docs/mobile-editor-comparison.md)：追加查核 7 個手機 App／媒體元件，列出授權與補齊順序。
 - [開源補齊方案](docs/open-source-reuse.md)：已核對候選元件的來源、授權與版本差異。
 - 獨立 Android ARM64 平台依賴編譯實驗，驗證 android-activity / ndk / CPAL / JNI 可共同編譯；尚非 App。
 

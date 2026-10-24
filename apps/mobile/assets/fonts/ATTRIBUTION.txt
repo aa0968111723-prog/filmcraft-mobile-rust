@@ -1,0 +1,10 @@
+繁體中文字型：Noto Sans CJK TC Regular（未修改）
+來源：https://github.com/notofonts/noto-cjk
+固定版本：f8d157532fbfaeda587e826d4cd5b21a49186f7c
+原始檔案：Sans/OTF/TraditionalChinese/NotoSansCJKtc-Regular.otf
+SHA-256：dce08bd4fd91aa8aa76ed8fea4b694c2dfb8550f67871e326843212ddbeb88b4
+授權：SIL Open Font License 1.1，完整原文見 OFL.txt。
+字型著作權與作者資訊保留於原始字型的名稱表。
+
+原始字型著作權聲明（保留原文）：
+© 2014-2021 Adobe (http://www.adobe.com/).

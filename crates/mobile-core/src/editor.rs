@@ -17,9 +17,9 @@ pub enum DemoSource {
 impl DemoSource {
     pub fn title(self) -> &'static str {
         match self {
-            Self::Dawn => "Morning light",
-            Self::Waves => "Ocean study",
-            Self::Night => "After dark",
+            Self::Dawn => "晨光",
+            Self::Waves => "海浪",
+            Self::Night => "夜色",
         }
     }
 }
@@ -55,11 +55,11 @@ pub enum ProjectError {
 impl fmt::Display for ProjectError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str(match self {
-            Self::InvalidProject => "The saved demo project is invalid or unsupported.",
-            Self::InvalidTrim => "Trim requires 0 <= in < out <= 300 frames.",
-            Self::InvalidSelection => "Select a clip first.",
-            Self::SplitAtEdge => "Move the playhead inside the selected clip to split.",
-            Self::ClipLimit => "This preview supports up to 64 clips.",
+            Self::InvalidProject => "示範專案資料無效，或版本不受支援。",
+            Self::InvalidTrim => "裁切起點必須小於終點，範圍需介於第 0 至第 300 格。",
+            Self::InvalidSelection => "請先選取一個片段。",
+            Self::SplitAtEdge => "請將播放頭移至所選片段內部，再進行分割。",
+            Self::ClipLimit => "此預覽版最多支援 64 個片段。",
         })
     }
 }

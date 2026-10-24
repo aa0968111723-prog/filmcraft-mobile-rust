@@ -32,10 +32,10 @@ pub enum EditError {
 impl fmt::Display for EditError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str(match self {
-            Self::InvalidRange => "trim requires 0 <= start < end <= source duration",
-            Self::TimeOverflow => "edit time exceeds the supported tick range",
-            Self::EmptyFrame => "frame dimensions must be greater than zero",
-            Self::FrameTooLarge => "frame exceeds the mobile preview cache budget",
+            Self::InvalidRange => "裁切起點必須小於終點，且不得超出來源長度。",
+            Self::TimeOverflow => "剪輯時間超過支援的時間刻度範圍。",
+            Self::EmptyFrame => "影格的寬度與高度必須大於零。",
+            Self::FrameTooLarge => "影格超過行動裝置預覽快取的容量上限。",
         })
     }
 }

@@ -1,0 +1,79 @@
+[
+  {
+    "repository": "devhyper/open-video-editor",
+    "branch": "master",
+    "sha": "2f3b1534cdf4ea8d96fca027916857500e80a423",
+    "license": "GPL-3.0",
+    "archived": false,
+    "pushed_at": "2026-08-26T22:51:27Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/devhyper/open-video-editor"
+  },
+  {
+    "repository": "mlm-games/Miniter",
+    "branch": "main",
+    "sha": "3c446fa751690cf9e145b93f02ea3bbb66853c94",
+    "license": "GPL-3.0",
+    "archived": false,
+    "pushed_at": "2026-10-21T08:44:21Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/mlm-games/Miniter"
+  },
+  {
+    "repository": "a914-gowtham/android-video-trimmer",
+    "branch": "master",
+    "sha": "9a241bba91272ef43a141e901ee33e34c2ca14b1",
+    "license": "NOASSERTION",
+    "archived": false,
+    "pushed_at": "2026-02-10T17:50:20Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/a914-gowtham/android-video-trimmer"
+  },
+  {
+    "repository": "deepmedia/Transcoder",
+    "branch": "main",
+    "sha": "a28e1eaf575181f2911f857d978e539b41625de0",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2024-11-05T03:24:32Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/deepmedia/Transcoder"
+  },
+  {
+    "repository": "VideoFlint/Cabbage",
+    "branch": "master",
+    "sha": "41c78700c32b3814eaa242a3b4fe9323e14d63fc",
+    "license": "MIT",
+    "archived": false,
+    "pushed_at": "2023-11-08T00:02:29Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/VideoFlint/Cabbage"
+  },
+  {
+    "repository": "HHK1/PryntTrimmerView",
+    "branch": "master",
+    "sha": "6abd91b68b69ede226093ebb7f847045d7f4c34b",
+    "license": "MIT",
+    "archived": false,
+    "pushed_at": "2024-12-11T15:34:11Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/HHK1/PryntTrimmerView"
+  },
+  {
+    "repository": "MetalPetal/MetalPetal",
+    "branch": "master",
+    "sha": "f9b78897bd4214bb097f352a1bde0a4f4a1e2ddb",
+    "license": "MIT",
+    "archived": false,
+    "pushed_at": "2024-04-10T13:30:17Z",
+    "observed_on": "2026-10-25",
+    "status": "research-only-not-adopted",
+    "url": "https://github.com/MetalPetal/MetalPetal"
+  }
+]

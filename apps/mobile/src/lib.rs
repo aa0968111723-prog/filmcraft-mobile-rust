@@ -25,6 +25,22 @@ pub struct MobileEditor {
 
 impl MobileEditor {
     pub fn new(cc: &eframe::CreationContext<'_>, save_path: Option<PathBuf>) -> Self {
+        let mut fonts = egui::FontDefinitions::default();
+        fonts.font_data.insert(
+            "traditional-chinese".to_owned(),
+            egui::FontData::from_static(include_bytes!(
+                "../assets/fonts/NotoSansCJKtc-Regular.otf"
+            ))
+            .into(),
+        );
+        for family in [egui::FontFamily::Proportional, egui::FontFamily::Monospace] {
+            fonts
+                .families
+                .entry(family)
+                .or_default()
+                .push("traditional-chinese".to_owned());
+        }
+        cc.egui_ctx.set_fonts(fonts);
         cc.egui_ctx.set_theme(egui::Theme::Dark);
         let mut style = (*cc.egui_ctx.style_of(egui::Theme::Dark)).clone();
         style.visuals = egui::Visuals::dark();
@@ -37,13 +53,13 @@ impl MobileEditor {
         style.spacing.item_spacing = Vec2::new(8.0, 9.0);
         cc.egui_ctx.set_style_of(egui::Theme::Dark, style);
         let (project, status) = match save_path.as_deref().map(read_project) {
-            Some(Ok(project)) => (project, "Restored your demo project".to_owned()),
+            Some(Ok(project)) => (project, "已載入上次儲存的示範專案".to_owned()),
             Some(Err(error)) if save_path.as_ref().is_some_and(|path| path.exists()) => {
-                (Project::default(), format!("Could not restore: {error}"))
+                (Project::default(), format!("無法還原專案：{error}"))
             }
             _ => (
                 Project::default(),
-                "Ready. Edit the three generated demo clips.".to_owned(),
+                "準備就緒，請試著剪輯三段生成的示範片段。".to_owned(),
             ),
         };
         let mut editor = Self {
@@ -85,21 +101,21 @@ impl MobileEditor {
     fn persist(&mut self) {
         self.status = match self.save_path.as_deref() {
             Some(path) => match write_project(&self.project, path) {
-                Ok(()) => "Saved on this device".to_owned(),
-                Err(error) => format!("Save failed: {error}"),
+                Ok(()) => "已儲存至這部裝置".to_owned(),
+                Err(error) => format!("儲存失敗：{error}"),
             },
-            None => "Edits are in memory; storage is unavailable".to_owned(),
+            None => "目前無法儲存，編輯內容僅暫存於記憶體。".to_owned(),
         };
     }
 
     fn transport(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
-            if ui.button("Start").clicked() {
+            if ui.button("回到開頭").clicked() {
                 self.playhead = 0;
                 self.fractional_frame = 0.0;
             }
             if ui
-                .button(if self.playing { "Pause" } else { "Play" })
+                .button(if self.playing { "暫停" } else { "播放" })
                 .clicked()
             {
                 self.playing = !self.playing;
@@ -130,7 +146,7 @@ impl MobileEditor {
     fn viewer(&mut self, ui: &mut egui::Ui, source: DemoSource, source_frame: u32) {
         draw_preview(ui, source, source_frame);
         ui.label(
-            egui::RichText::new("Generated demo footage - no video import / export yet")
+            egui::RichText::new("程式生成的示範畫面，目前尚不支援影片匯入與匯出。")
                 .size(11.0)
                 .color(MUTED),
         );
@@ -139,8 +155,8 @@ impl MobileEditor {
 
     fn timeline(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
-            ui.label(egui::RichText::new("TIMELINE").strong().color(MUTED));
-            ui.label(format!("{} clips / 30 fps", self.project.clips.len()));
+            ui.label(egui::RichText::new("時間軸").strong().color(MUTED));
+            ui.label(format!("{} 個片段／每秒 30 格", self.project.clips.len()));
         });
         let mut choose = None;
         let mut offset = 0_u32;
@@ -151,7 +167,7 @@ impl MobileEditor {
                     for (index, clip) in self.project.clips.iter().enumerate() {
                         let selected = index == self.selected;
                         let title = format!(
-                            "{}\n{:.1}s",
+                            "{}\n{:.1} 秒",
                             clip.source.title(),
                             f64::from(clip.frames()) / 30.0
                         );
@@ -179,7 +195,7 @@ impl MobileEditor {
             self.sync_trim();
         }
         ui.horizontal_wrapped(|ui| {
-            if ui.button("Split here").clicked() {
+            if ui.button("在此分割").clicked() {
                 let before = self.project.clone();
                 match self.project.split(self.selected, self.playhead) {
                     Ok(()) => {
@@ -190,7 +206,7 @@ impl MobileEditor {
                 }
             }
             if ui
-                .add_enabled(!self.undo.is_empty(), egui::Button::new("Undo"))
+                .add_enabled(!self.undo.is_empty(), egui::Button::new("復原"))
                 .clicked()
                 && let Some(previous) = self.undo.pop()
             {
@@ -199,7 +215,7 @@ impl MobileEditor {
                 self.reconcile();
             }
             if ui
-                .add_enabled(!self.redo.is_empty(), egui::Button::new("Redo"))
+                .add_enabled(!self.redo.is_empty(), egui::Button::new("重做"))
                 .clicked()
                 && let Some(next) = self.redo.pop()
             {
@@ -228,12 +244,12 @@ impl MobileEditor {
             .clips
             .get(self.selected)
             .map(|c| c.source.title())
-            .unwrap_or("No clip");
-        ui.label(egui::RichText::new(format!("TRIM / {name}")).strong());
-        ui.add(egui::Slider::new(&mut self.trim_in, 0..=299).text("In frame"));
-        ui.add(egui::Slider::new(&mut self.trim_out, 1..=300).text("Out frame"));
+            .unwrap_or("未選取片段");
+        ui.label(egui::RichText::new(format!("裁切／{name}")).strong());
+        ui.add(egui::Slider::new(&mut self.trim_in, 0..=299).text("起點影格"));
+        ui.add(egui::Slider::new(&mut self.trim_out, 1..=300).text("終點影格"));
         ui.horizontal_wrapped(|ui| {
-            if ui.button("Apply trim").clicked() {
+            if ui.button("套用裁切").clicked() {
                 let before = self.project.clone();
                 match self
                     .project
@@ -244,9 +260,9 @@ impl MobileEditor {
                 }
             }
             for (label, destination) in [
-                ("Move left", self.selected.checked_sub(1)),
+                ("向左移動", self.selected.checked_sub(1)),
                 (
-                    "Move right",
+                    "向右移動",
                     self.selected
                         .checked_add(1)
                         .filter(|i| *i < self.project.clips.len()),
@@ -289,16 +305,34 @@ impl eframe::App for MobileEditor {
                 ui.set_max_width(ui.available_width().min(1000.0));
                 ui.add_space(28.0); // NativeActivity system bars; validated on emulator separately.
                 ui.horizontal(|ui| {
-                    ui.label(egui::RichText::new("FILMCRAFT").size(25.0).strong().color(ACCENT));
-                    ui.label(egui::RichText::new("MOBILE").size(12.0).color(MUTED));
+                    ui.label(
+                        egui::RichText::new("影片工坊")
+                            .size(25.0)
+                            .strong()
+                            .color(ACCENT),
+                    );
+                    ui.label(egui::RichText::new("行動版").size(12.0).color(MUTED));
                 });
-                ui.label(egui::RichText::new("EARLY PREVIEW  /  0.1.0-alpha.1").size(11.0).color(MUTED));
+                ui.label(
+                    egui::RichText::new("早期預覽版／0.1.0 第 2 版")
+                        .size(11.0)
+                        .color(MUTED),
+                );
                 ui.add_space(6.0);
                 let (index, local) = self.project.clip_at(self.playhead).unwrap_or((0, 0));
-                let source = self.project.clips.get(index).map(|c| c.source).unwrap_or(DemoSource::Dawn);
-                let source_frame = self.project.clips.get(index)
+                let source = self
+                    .project
+                    .clips
+                    .get(index)
+                    .map(|c| c.source)
+                    .unwrap_or(DemoSource::Dawn);
+                let source_frame = self
+                    .project
+                    .clips
+                    .get(index)
                     .and_then(|clip| u32::try_from(clip.start.0 / FRAME_TICKS).ok())
-                    .unwrap_or(0).saturating_add(local);
+                    .unwrap_or(0)
+                    .saturating_add(local);
                 if filmcraft_mobile_core::layout_for_width(ui.available_width() as u32)
                     == filmcraft_mobile_core::Layout::Expanded
                 {
@@ -317,12 +351,12 @@ impl eframe::App for MobileEditor {
                 }
                 ui.add_space(5.0);
                 ui.label(egui::RichText::new(&self.status).color(ACCENT).size(12.0));
-                ui.collapsing("About this preview", |ui| {
-                    ui.label("Native Rust interface. Offline. No account or network permissions.");
-                    ui.label("Editing uses FilmCraft integer Tick time. Demo state saves after every edit.");
-                    ui.label("This prototype does not edit or export your device's videos.");
-                    ui.label("MIT OR Apache-2.0. Third-party notices are included in the APK assets.");
-                    if ui.button("Reset demo project").clicked() {
+                ui.collapsing("關於此預覽版", |ui| {
+                    ui.label("採用 Rust 原生介面，可離線使用，不需要帳號或網路權限。");
+                    ui.label("使用整數時間刻度精確剪輯，每次編輯後自動儲存示範專案。");
+                    ui.label("此版本尚不能匯入、編輯或匯出裝置裡的真實影片，也不包含音訊。");
+                    ui.label("開源授權：MIT 或 Apache-2.0。安裝檔內附第三方授權原文。");
+                    if ui.button("重設示範專案").clicked() {
                         let before = std::mem::take(&mut self.project);
                         self.selected = 0;
                         self.playhead = 0;
@@ -395,7 +429,7 @@ fn draw_preview(ui: &mut egui::Ui, source: DemoSource, frame: u32) {
     painter.text(
         rect.left_top() + Vec2::new(14.0, 13.0),
         egui::Align2::LEFT_TOP,
-        "DEMO / PROCEDURAL",
+        "示範素材／程式生成",
         FontId::monospace(11.0),
         Color32::WHITE,
     );
@@ -408,27 +442,52 @@ fn draw_preview(ui: &mut egui::Ui, source: DemoSource, frame: u32) {
     );
 }
 
-fn read_project(path: &Path) -> Result<Project, Box<dyn std::error::Error>> {
-    let file = std::fs::File::open(path)?;
-    let mut text = String::new();
-    file.take(MAX_PROJECT_BYTES + 1).read_to_string(&mut text)?;
-    if text.len() as u64 > MAX_PROJECT_BYTES {
-        return Err("Saved project is too large".into());
+#[derive(Debug)]
+enum StorageError {
+    Read,
+    TooLarge,
+    Format,
+    Project(filmcraft_mobile_core::editor::ProjectError),
+    Write,
+}
+
+impl std::fmt::Display for StorageError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Read => f.write_str("無法讀取專案檔案，請確認儲存空間與存取權限。"),
+            Self::TooLarge => f.write_str("專案檔案超過大小上限。"),
+            Self::Format => f.write_str("專案檔案格式不正確或已損毀。"),
+            Self::Project(error) => error.fmt(f),
+            Self::Write => f.write_str("無法寫入專案檔案，請確認儲存空間與存取權限。"),
+        }
     }
-    let project: Project = serde_json::from_str(&text)?;
-    project.validate()?;
+}
+
+impl std::error::Error for StorageError {}
+
+fn read_project(path: &Path) -> Result<Project, StorageError> {
+    let file = std::fs::File::open(path).map_err(|_| StorageError::Read)?;
+    let mut text = String::new();
+    file.take(MAX_PROJECT_BYTES + 1)
+        .read_to_string(&mut text)
+        .map_err(|_| StorageError::Read)?;
+    if text.len() as u64 > MAX_PROJECT_BYTES {
+        return Err(StorageError::TooLarge);
+    }
+    let project: Project = serde_json::from_str(&text).map_err(|_| StorageError::Format)?;
+    project.validate().map_err(StorageError::Project)?;
     Ok(project)
 }
 
-fn write_project(project: &Project, path: &Path) -> Result<(), Box<dyn std::error::Error>> {
-    project.validate()?;
+fn write_project(project: &Project, path: &Path) -> Result<(), StorageError> {
+    project.validate().map_err(StorageError::Project)?;
     let temporary = path.with_extension("tmp");
-    let mut file = std::fs::File::create(&temporary)?;
-    serde_json::to_writer(&mut file, project)?;
-    file.flush()?;
-    file.sync_all()?;
+    let mut file = std::fs::File::create(&temporary).map_err(|_| StorageError::Write)?;
+    serde_json::to_writer(&mut file, project).map_err(|_| StorageError::Write)?;
+    file.flush().map_err(|_| StorageError::Write)?;
+    file.sync_all().map_err(|_| StorageError::Write)?;
     drop(file);
-    std::fs::rename(temporary, path)?;
+    std::fs::rename(temporary, path).map_err(|_| StorageError::Write)?;
     Ok(())
 }
 
@@ -493,7 +552,7 @@ pub fn android_main(app: android_activity::AndroidApp) {
     };
     let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
         eframe::run_native(
-            "FilmCraft Mobile",
+            "影片工坊行動版",
             options,
             Box::new(move |cc| Ok(Box::new(MobileEditor::new(cc, path)))),
         )
