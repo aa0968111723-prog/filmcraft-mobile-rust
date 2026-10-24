@@ -41,6 +41,24 @@ Media3 僅作必要時的小型平台橋接候選。xbuild 已標示停止維護
 已建立排除於產品 workspace 外的 Android 依賴 probe；其編譯成功不代表播放器完成。
 egui 0.37 已發行，但現有 FilmCraft 使用 0.36，應先驗證版本一致性。
 
+## 首個可安裝預覽版
+
+`apps/mobile` 使用固定版本 eframe 0.36.2 / android-activity 0.6.1。
+純 Rust NativeActivity 入口僅局部允許匯出符號所需的 `no_mangle` 屬性；
+mobile-core 仍完全禁止 unsafe，應用程式也沒有 unsafe 區塊。
+
+為先提供可下載成果，第一版直接使用 Android SDK 的 aapt2 / zipalign / apksigner
+打包 NativeActivity，暫不需要 Java 或 Gradle。這是縮小初版宿主依賴的決定；
+日後相簿與系統分享若需要 JVM 自訂 Activity，再補 Gradle 宿主。
+
+這版只編輯程式生成的三段示範素材，具有自己的受限 demo Project 格式。
+沿用 FilmCraft 的精確 Tick，沒有宣稱已整合整套 project / edit / engine。
+播放頭以整數影格定位；浮點數僅用於畫面計時／繪製，剪輯時間仍是整數。
+每次操作後同步寫入同目錄暫存檔、sync_all，再 rename 取代存檔；
+此保護不等於斷電保證，重新啟動只復原專案內容，不復原 undo 歷史。
+
+下載與建置說明見 [android-preview.md](android-preview.md)。
+
 ## 裝置限制與資料安全
 
 - 用可用邏輯寬度決定版面，840 起使用 expanded，旋轉／分割視窗時重算。

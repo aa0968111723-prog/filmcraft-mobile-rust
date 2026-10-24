@@ -12,7 +12,10 @@
 
 - [x] 查核開源補齊方案、授權證據、維護狀態與版本差異（docs/open-source-reuse.md）。
 - [x] 獨立 Android ARM64 probe：android-activity / ndk / CPAL / JNI 共同編譯通過。
-- [ ] 驗證 Rust UI 宿主，建立 Gradle / Manifest 與 APK。
+- [x] Rust UI 宿主、Manifest 與簽署 APK（NativeActivity 直接用 SDK 打包；暫不需要 Gradle）。
+- [x] 生成示範素材的時間軸、裁切、分割、排序、復原／重做與本機存檔。
+- [x] Android 16 模擬器操作、直向／橫向與程序重開復原驗證（非實體裝置驗證）。
+- [ ] GitHub Release 提供 APK、校驗碼與第三方授權下載。
 - [ ] 手機直向、橫向、平板分割視窗、安全區與觸控。
 - [ ] 系統選擇一支影片，處理 content URI。
 - [ ] MediaCodec 硬體解碼與 GPU 預覽，記錄失敗時的錯誤行為。

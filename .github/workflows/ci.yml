@@ -45,3 +45,4 @@ jobs:
       - run: cargo fmt --manifest-path tools/android-dependency-probe/Cargo.toml --check
       # Compile-only experiment: no Android SDK, APK, decoder or audio session is launched.
       - run: cargo clippy --manifest-path tools/android-dependency-probe/Cargo.toml --target aarch64-linux-android --locked -- -D warnings
+      - run: cargo clippy -p filmcraft-mobile-app --target aarch64-linux-android --locked -- -D warnings

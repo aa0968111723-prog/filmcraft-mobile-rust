@@ -1,6 +1,7 @@
 //! Portable mobile policies. No UI, media decoder, or operating system bridge yet.
 
 pub use filmcraft_time::{TICKS_PER_SECOND, Tick};
+pub mod editor;
 use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
