@@ -6,6 +6,7 @@
 **目前狀態：原生 Android 示範剪輯預覽版。可操作生成素材的時間軸，尚不能匯入／匯出真實影片。**
 
 取得 APK：[Android 預覽版 Release](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/tag/v0.1.0-alpha.1)。
+[直接下載 APK](https://github.com/aa0968111723-prog/filmcraft-mobile-rust/releases/download/v0.1.0-alpha.1/filmcraft-mobile-0.1.0-alpha.1-universal.apk)（約 6.2 MB）。
 安裝與建置說明見 [docs/android-preview.md](docs/android-preview.md)，驗證範圍見 [docs/android-validation.md](docs/android-validation.md)。
 iPhone / iPad 尚無安裝檔。
 

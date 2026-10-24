@@ -15,7 +15,7 @@
 - [x] Rust UI 宿主、Manifest 與簽署 APK（NativeActivity 直接用 SDK 打包；暫不需要 Gradle）。
 - [x] 生成示範素材的時間軸、裁切、分割、排序、復原／重做與本機存檔。
 - [x] Android 16 模擬器操作、直向／橫向與程序重開復原驗證（非實體裝置驗證）。
-- [ ] GitHub Release 提供 APK、校驗碼與第三方授權下載。
+- [x] GitHub Release v0.1.0-alpha.1 提供 APK、校驗碼與第三方授權下載；公開下載後核對簽章與 SHA-256 通過。
 - [ ] 手機直向、橫向、平板分割視窗、安全區與觸控。
 - [ ] 系統選擇一支影片，處理 content URI。
 - [ ] MediaCodec 硬體解碼與 GPU 預覽，記錄失敗時的錯誤行為。
