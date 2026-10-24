@@ -1,0 +1,30 @@
+[workspace]
+members = ["crates/mobile-core", "tools/mobile-smoke"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/aa0968111723-prog/filmcraft-mobile-rust"
+
+[workspace.dependencies]
+filmcraft-time = { git = "https://github.com/aa0968111723-prog/filmcraft.git", rev = "8309f21a6c3f34ddf190af7fd9bfd913053a1fd5" }
+filmcraft-mobile-core = { path = "crates/mobile-core" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+unimplemented = "deny"
+unreachable = "deny"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+panic = "unwind"

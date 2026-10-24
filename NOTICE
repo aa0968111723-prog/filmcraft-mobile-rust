@@ -1,0 +1,13 @@
+FilmCraft Mobile Rust
+
+Independent mobile-focused experimental project. Not an official upstream release.
+
+Uses filmcraft-time from FilmCraft, pinned to commit:
+8309f21a6c3f34ddf190af7fd9bfd913053a1fd5
+Source: https://github.com/aa0968111723-prog/filmcraft
+Upstream: https://github.com/storytold/filmcraft
+
+FilmCraft and its contributors retain their original copyright notices.
+The included license texts are preserved from the source checkout.
+New contributions are licensed under MIT OR Apache-2.0.
+No ArtCraft trademark artwork is included.

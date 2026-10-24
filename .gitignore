@@ -1,0 +1,10 @@
+/target/
+/.local/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+.env
+.env.*
+!.env.example
+.DS_Store

@@ -1,0 +1,14 @@
+[package]
+name = "filmcraft-mobile-core"
+description = "Mobile policies and exact edit ranges for a FilmCraft mobile prototype"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+filmcraft-time.workspace = true
+
+[lints]
+workspace = true
