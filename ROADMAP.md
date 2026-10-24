@@ -10,6 +10,8 @@
 
 ## M1 — Android 宿主與實機預覽
 
+- [x] 查核開源補齊方案、授權證據、維護狀態與版本差異（docs/open-source-reuse.md）。
+- [x] 獨立 Android ARM64 probe：android-activity / ndk / CPAL / JNI 共同編譯通過。
 - [ ] 驗證 Rust UI 宿主，建立 Gradle / Manifest 與 APK。
 - [ ] 手機直向、橫向、平板分割視窗、安全區與觸控。
 - [ ] 系統選擇一支影片，處理 content URI。

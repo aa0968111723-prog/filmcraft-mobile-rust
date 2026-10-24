@@ -34,3 +34,14 @@ jobs:
           targets: ${{ matrix.target }}
       # Checks the portable library only; does not build or sign an APK/IPA.
       - run: cargo check -p filmcraft-mobile-core --lib --locked --target ${{ matrix.target }}
+  android-dependency-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+          targets: aarch64-linux-android
+      - run: cargo fmt --manifest-path tools/android-dependency-probe/Cargo.toml --check
+      # Compile-only experiment: no Android SDK, APK, decoder or audio session is launched.
+      - run: cargo clippy --manifest-path tools/android-dependency-probe/Cargo.toml --target aarch64-linux-android --locked -- -D warnings

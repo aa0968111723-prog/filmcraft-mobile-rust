@@ -1,0 +1,19 @@
+[package]
+name = "filmcraft-android-dependency-probe"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT OR Apache-2.0"
+publish = false
+
+# Isolated experiment: these are not yet dependencies of the shipping application.
+[workspace]
+
+[target.'cfg(target_os = "android")'.dependencies]
+android-activity = { version = "=0.6.1", features = ["native-activity"] }
+ndk = { version = "=0.9.0", features = ["media", "nativewindow", "api-level-26"] }
+cpal = "=0.18.2"
+jni = "=0.22.4"
+
+[lints.rust]
+unsafe_code = "forbid"

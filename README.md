@@ -27,6 +27,8 @@
 - 驗證剪裁範圍、拒絕時間溢位、計算有限的 CPU 預覽快取容量。
 - 手機／平板寬度版面策略，供之後介面使用；目前沒有畫面。
 - 主機端 smoke example、核心測試與 GitHub Actions 設定。
+- [開源補齊方案](docs/open-source-reuse.md)：已核對候選元件的來源、授權與版本差異。
+- 獨立 Android ARM64 平台依賴編譯實驗，驗證 android-activity / ndk / CPAL / JNI 可共同編譯；尚非 App。
 
 ## 開發
 

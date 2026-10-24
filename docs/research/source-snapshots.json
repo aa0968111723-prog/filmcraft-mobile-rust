@@ -1,0 +1,117 @@
+[
+  {
+    "repository": "emilk/egui",
+    "branch": "main",
+    "sha": "bf5ac0dac137af9a4861611f3d2a77ad531f50e3",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-10-22T10:03:41Z",
+    "description": "egui: an easy-to-use immediate mode GUI in Rust that runs on both web and native",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "rust-mobile/android-activity",
+    "branch": "main",
+    "sha": "b4ddf059b77be12cdb955d394e65a92e7568d936",
+    "license": null,
+    "archived": false,
+    "pushed_at": "2026-06-22T15:32:30Z",
+    "description": "Glue for building Rust applications on Android with NativeActivity or GameActivity",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "rust-mobile/ndk",
+    "branch": "master",
+    "sha": "5ae5c56f68165ce902845b646b63a7cb15a92ead",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-10-09T14:04:35Z",
+    "description": " Rust bindings to the Android NDK",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "bbqsrc/cargo-ndk",
+    "branch": "main",
+    "sha": "8cffdefbc9fc29b15ef50390b73258032b26734b",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-10-17T09:52:49Z",
+    "description": "Compile Rust projects with the Android NDK without hassle",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "rust-mobile/xbuild",
+    "branch": "master",
+    "sha": "e67b501cbe0e9ca5436c223aa7ec0fe5e27544d1",
+    "license": null,
+    "archived": false,
+    "pushed_at": "2026-07-21T15:16:14Z",
+    "description": "Cross compile rust to any platform (unmaintained)",
+    "observed_on": "2026-10-24",
+    "status": "do-not-adopt"
+  },
+  {
+    "repository": "RustAudio/cpal",
+    "branch": "master",
+    "sha": "68f6f752b2941ab101e2d7d67fe3f1caa67d9eaf",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-10-20T19:06:51Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "madsmtm/objc2",
+    "branch": "main",
+    "sha": "8a5abacd90d5403fc0463459a35826f892b9142e",
+    "license": "NOASSERTION",
+    "archived": false,
+    "pushed_at": "2026-10-17T11:35:15Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "makepad/makepad",
+    "branch": "dev",
+    "sha": "44ecb822b48106fa76bde4dfd309e5a8a7ff1932",
+    "license": "MIT",
+    "archived": false,
+    "pushed_at": "2026-10-24T05:53:29Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "project-robius/robrix",
+    "branch": "main",
+    "sha": "b1241fc2e0fd17d341f28ffde81e217e742df8bb",
+    "license": "MIT",
+    "archived": false,
+    "pushed_at": "2026-10-22T22:00:52Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "androidx/media",
+    "branch": "release",
+    "sha": "8c6678b657ede1e7883fc164ef73ed483c7796c3",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-10-23T20:51:09Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  },
+  {
+    "repository": "jni-rs/jni-rs",
+    "branch": "master",
+    "sha": "dbfb17647988b81ff37b897ce93cc85ee4c84863",
+    "license": "Apache-2.0",
+    "archived": false,
+    "pushed_at": "2026-07-30T15:27:02Z",
+    "observed_on": "2026-10-24",
+    "status": "candidate-not-runtime-integrated"
+  }
+]

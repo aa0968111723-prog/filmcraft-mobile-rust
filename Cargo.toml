@@ -1,5 +1,6 @@
 [workspace]
 members = ["crates/mobile-core", "tools/mobile-smoke"]
+exclude = ["tools/android-dependency-probe"]
 resolver = "3"
 
 [workspace.package]

@@ -31,6 +31,16 @@ Dioxus 可以讓應用 UI 使用 Rust，但目前官方行動路徑使用系統 
 不等於整個執行堆疊皆為 Rust。Slint 也可評估，但需另外確認授權與影片表面整合。
 初期不引入多套 UI 框架。
 
+## 開源元件優先（2026-10-24 補充）
+
+具體選型與驗證見 [open-source-reuse.md](open-source-reuse.md)。
+Android 第一條路線為相容現有 egui 0.36 的宿主、android-activity、ndk、CPAL、JNI，
+搭配 cargo-ndk + Gradle 打包。Makepad / Robrix 作 Rust UI 備選；
+Media3 僅作必要時的小型平台橋接候選。xbuild 已標示停止維護，暫不採用。
+
+已建立排除於產品 workspace 外的 Android 依賴 probe；其編譯成功不代表播放器完成。
+egui 0.37 已發行，但現有 FilmCraft 使用 0.36，應先驗證版本一致性。
+
 ## 裝置限制與資料安全
 
 - 用可用邏輯寬度決定版面，840 起使用 expanded，旋轉／分割視窗時重算。
